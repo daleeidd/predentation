@@ -1,0 +1,41 @@
+{
+  "name": "predentation",
+  "version": "0.0.0",
+  "description": "A stream for removing indentation from the pre tag",
+  "author": "Dale Eidd <dale@eidd.name>",
+  "license": "MIT",
+  "keywords": [
+    "html",
+    "pre",
+    "indentation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daleeidd/predentation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/daleeidd/predentation/issues"
+  },
+  "homepage": "https://github.com/daleeidd/predentation",
+  "main": "index.js",
+  "bin": {
+    "predentation": "predentation"
+  },
+  "scripts": {
+    "pretest": "eslint . predentation",
+    "test": "mocha tests/test.js"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "eslint": "^0.24.1",
+    "mocha": "^2.2.5",
+    "stream-equal": "^0.1.5"
+  },
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "cheerio": "^0.17.0",
+    "commander": "^2.8.1",
+    "globby": "^2.1.0",
+    "through2": "^2.0.0"
+  }
+}

@@ -1,0 +1,64 @@
+#!/usr/bin/env node
+
+/*eslint no-process-exit: 0 */
+
+'use strict';
+
+var fs      = require('fs');
+var program = require('commander');
+var color   = require('chalk');
+var path    = require('path');
+var glob    = require('globby');
+
+var config       = require('./package.json');
+var predentation = require('./');
+
+program
+.version(config.version)
+.description('Change the presentation or indentation for the <pre> element')
+.option('-o, --output <path>', 'Output directory')
+.arguments('[input-files...]')
+.parse(process.argv);
+
+// Handle piped data
+if (process.stdin.isTTY == null) {
+  process.stdin.pipe(predentation()).pipe(process.stdout);
+}
+else {
+  if (program.args.length === 0) {
+    console.error(color.red('Error: No input provided'));
+    process.exit(1);
+  }
+
+  glob(program.args, function (error, files) {
+    if (error) {
+      console.error(color.red(error));
+      return;
+    }
+
+    files.forEach(function (file) {
+      var output;
+
+      // Use stdout if not output directory is given
+      if (program.output != null) {
+        // Recursively create directories if they do not exist
+        program.output.split(path.sep).reduce(function (directory, name) {
+          var absolutePath = path.join(directory, name);
+          if (!fs.existsSync(absolutePath)) {
+            fs.mkdirSync(absolutePath);
+          }
+          return absolutePath;
+        }, '');
+
+        output = fs.createWriteStream(path.resolve(program.output + '/' + file));
+      }
+      else {
+        output = process.stdout;
+      }
+
+      fs.createReadStream(file)
+        .pipe(predentation())
+        .pipe(output);
+    });
+  });
+}
