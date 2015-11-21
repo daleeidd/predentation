@@ -60,7 +60,9 @@ cat index.html | predentation | minify > output.html
 
 #### Options
 
-`-o --output`: Output directory
+These options are available to the CLI only:
+
+`-o --output`: Output directory (use redirection `>` for a single file)
 
 ### Build Tools
 
