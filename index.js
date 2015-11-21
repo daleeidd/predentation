@@ -8,7 +8,7 @@
 
 var cheerio = require('cheerio');
 var through = require('through2');
-var onlyTag = /^\s*<\/?\w.+>\s*$/;
+var onlyTag = /^\s*<\/?\w[^>]+>\s*$/;
 
 module.exports = (function () {
   return function () {
