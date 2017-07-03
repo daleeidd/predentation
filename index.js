@@ -36,7 +36,7 @@ module.exports = (function () {
           // Ignore lines with only whitespace
           if (line.match(/[^\s]+/)) {
             var current = (line.match(/^\s+/) !== null) ? line.match(/^\s+/)[0].length : 0;
-            level = level === null ? current : (current < level) ? current : level;
+            level = (level === null || level === 0) ? current : (current < level) ? current : level;
           }
         });
 
