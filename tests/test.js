@@ -73,5 +73,6 @@ describe('predentation', function () {
   it('should handle <code><pre> tag combination',                  evaluate(fixture++));
   it('should handle <pre><code> tag combination',                  evaluate(fixture++));
   it('should handle a complicated example',                        evaluate(fixture++));
+  it('should handle <pre><code> tag combination with classes',     evaluate(fixture++));
 
 });
